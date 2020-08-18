@@ -4,6 +4,7 @@ public class Main {
 
     public static void main(String[] args){
         String user = "Fazli";
-        System.out.println(user);
+        String secondUser = "Atef";
+        System.out.println(user + " " + secondUser);
     }
 }
