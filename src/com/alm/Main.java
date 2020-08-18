@@ -31,7 +31,7 @@ public class Main {
     }
 
     public static String getInput(String message) {
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.print(message);
         return sc.nextLine();
     }
