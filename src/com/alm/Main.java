@@ -2,7 +2,10 @@ package com.alm;
 
 import java.util.Scanner;
 
+<<<<<<< HEAD
 public class Main {
+    public static void main(String[] args) {
+
 
     public static void main(String[] args) {
         String[] gitMessage = {"Kontrollera vart nånstans användaren ligger? ", "Skapa en mapp med namnet 'softwaredev' för sitt första projekt",
@@ -34,3 +37,4 @@ public class Main {
     }
 
 }
+
