@@ -8,7 +8,7 @@ public class Main {
         String secondUser = "Atef";
         System.out.println(user + " " + secondUser);
 
-        user = "Jocke";
+        user = "Jocke lite bojke";
         System.out.println(user);
     }
 }
