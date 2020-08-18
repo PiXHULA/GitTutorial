@@ -6,7 +6,8 @@ public class Main {
 
         String user = "Fazli kan inte så mkt";
         String secondUser = "Atef";
-        System.out.println(user + " " + secondUser);
+        String thirdUser = "Jacob";
+        System.out.println(user + " " + secondUser + " " + thirdUser);
 
         user = "Jocke lite bojke";
         System.out.println(user);
