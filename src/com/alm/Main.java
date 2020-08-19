@@ -29,6 +29,7 @@ public class Main {
 
 
         System.out.println("Följ instruktionerna och ange svaret i terminalen");
+        System.out.println("Assign a reviewr from terminal");
         printSeparator();
     for (int i = 0; i < gitCommands.length; i++) {
             while(!getInput(gitMessage[i]).equalsIgnoreCase(gitCommands[i])) {
