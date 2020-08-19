@@ -23,7 +23,7 @@ public class Main {
             while(!getInput(gitMessage[i]).equalsIgnoreCase(gitCommands[i])) {
                 System.out.println("Felaktig inmatning, försök igen");
             }
-            System.out.println("Rätt!");
+            System.out.println("Rätt?");
             printSeparator();
         }
     }
