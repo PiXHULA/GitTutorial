@@ -17,7 +17,7 @@ public class Main {
                 "git remote add origin https://github.com/myfirstgithubrepo/softwaredev.git", "git push -u origin master"};
 
         System.out.println("Test from terminal");
-        System.out.println("Test from terminal again ");
+        System.out.println("Test from terminal again 2");
 
         for (int i = 0; i < gitCommands.length; i++) {
             while(!getInput(gitMessage[i] + ": ").equals(gitCommands[i])) {
