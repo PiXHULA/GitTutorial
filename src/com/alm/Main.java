@@ -21,6 +21,7 @@ public class Main {
         System.out.println("Test from terminal again ");
         System.out.println("Test from terminal again joakim");
         System.out.println("Test from terminal again joakim22");
+        System.out.println("Test from terminal again joakim22");
 
         for (int i = 0; i < gitCommands.length; i++) {
             while(!getInput(gitMessage[i] + ": ").equals(gitCommands[i])) {
