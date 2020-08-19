@@ -34,7 +34,6 @@ public class Main {
         System.out.print("Terminal: ");
         return sc.nextLine();
     }
-
     public static void printSeparator() {
         System.out.println("--------------------------------------------");
     }
