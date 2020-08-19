@@ -11,6 +11,8 @@ public class Main {
                 "Lägg till remote på: https://github.com/myfirstgithubrepo/softwaredev.git", "pusha till master"};
 
 
+
+
         String[] gitCommands = {"pwd", "mkdir softwaredev",
                 "cd softwaredev/", "touch Main.java", "git init",
                 "ls", "git add .", "git add Main2.java", "git status", "git commit -m \"first commit\"",
