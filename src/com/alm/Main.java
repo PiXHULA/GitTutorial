@@ -16,6 +16,9 @@ public class Main {
                 "ls", "git add .", "git add Main2.java", "git status", "git commit -m \"first commit\"",
                 "git remote add origin https://github.com/myfirstgithubrepo/softwaredev.git", "git push -u origin master"};
 
+
+
+
         for (int i = 0; i < gitCommands.length; i++) {
             while(!getInput(gitMessage[i] + ": ").equals(gitCommands[i])) {
                 System.out.println("Felaktig inmatning, försök igen");
