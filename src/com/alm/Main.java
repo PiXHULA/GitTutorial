@@ -17,7 +17,7 @@ public class Main {
                 "git remote add origin https://github.com/myfirstgithubrepo/softwaredev.git", "git push -u origin master"};
 
 
-        System.out.println("Test from terminal");
+        System.out.println("Fazlis Branch ");
         System.out.println("Test issues from  from terminal again 2");
         System.out.println("Close issue from  asdterminal");
         System.out.println("Close issue from terminal");
