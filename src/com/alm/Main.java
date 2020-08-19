@@ -2,17 +2,12 @@ package com.alm;
 
 import java.util.Scanner;
 
-<<<<<<< HEAD
 public class Main {
-    public static void main(String[] args) {
-
-
     public static void main(String[] args) {
         String[] gitMessage = {"Kontrollera vart nånstans användaren ligger? ", "Skapa en mapp med namnet 'softwaredev' för sitt första projekt",
                 "Gå in i mappen du skapade", "skapa filen Main.java", "Börja en initial commit",
                 "Kolla vilka filer vi har i mappen", "Lägg till alla filer i projektet", "Lägg till en fil i commiten", "Se tracked och untracked filer", "Commita med kommentar 'first commit'",
                 "Lägg till remote på: https://github.com/myfirstgithubrepo/softwaredev.git", "pusha till master"};
-
 
         String[] gitCommands = {"pwd", "mkdir softwaredev",
                 "cd softwaredev/", "touch Main.java", "git init",
@@ -22,6 +17,9 @@ public class Main {
         System.out.println("Test from terminal");
         System.out.println("Test from terminal again 2");
         System.out.println("Close issue from  asdterminal");
+        System.out.println("Close issue from terminal");
+        System.out.println("Test from terminal again ");
+        System.out.println("Test from terminal again joakim");
 
         for (int i = 0; i < gitCommands.length; i++) {
             while(!getInput(gitMessage[i] + ": ").equals(gitCommands[i])) {
@@ -35,6 +33,4 @@ public class Main {
         System.out.print(message);
         return sc.nextLine();
     }
-
 }
-
