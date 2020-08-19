@@ -34,6 +34,7 @@ public class Main {
         return sc.nextLine();
     }
 
+
     public static void printSeparator() {
         System.out.println("--------------------------------------------");
     }
