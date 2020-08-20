@@ -5,6 +5,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 public class View extends JFrame{
 
@@ -14,9 +19,12 @@ public class View extends JFrame{
     JLabel description;
     JTextField textField;
     JTextArea textArea;
-    JLabel terminal;
+    JLabel label;
+    OS OS;
 
     public View(Question startingQuestion,Controller controller) {
+
+        OS = OSValidator.getOs();
 
         currentQuestion = startingQuestion;
         this.controller = controller;
@@ -30,34 +38,50 @@ public class View extends JFrame{
         jLabel.setFont(new Font("Calibri", Font.PLAIN, 72));
         jLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+
         description = new JLabel(currentQuestion.getMessage(), SwingConstants.CENTER);
         description.setFont(new Font("Calibri", Font.PLAIN, 12));
         description.setBorder(new EmptyBorder(20,0,20,0));
 
-        JPanel outputPanel = new JPanel(new GridLayout(2,1));
-        JPanel inputPanel = new JPanel(new FlowLayout());
+        //input output panels
+        JPanel terminal = new JPanel(new BorderLayout());//inputpanel och outpanel
+//        JPanel inputPanel = new JPanel(new FlowLayout()); //label(t) och textfield
+
+        //containers
+        JPanel inputPanel = new JPanel();
+        inputPanel.setSize(100,20);
+        JPanel outpanel =  new JPanel();
+
+
 
         inputPanel.setBackground(Color.BLACK);
-
-        terminal = new JLabel("Terminal~ % ", SwingConstants.LEFT);
-        terminal.setForeground(Color.WHITE);
+        String username = getUsername("whoamI").get(0);
+        label = new JLabel(username + "$ ", SwingConstants.LEFT);
+        label.setForeground(Color.WHITE);
+        label.setBackground(Color.RED);
 
         textField = new JTextField();
-        textField.setBackground(Color.black);
+        textField.setBackground(Color.BLACK);
         textField.setForeground(Color.white);
         textField.setBorder(new EmptyBorder(0,0,0,0));
-        textField.setPreferredSize(new Dimension());
+        textField.setPreferredSize(new Dimension(100,20));
 
         textArea = new JTextArea(5,1);
         textArea.setBackground(Color.BLACK);
+        textArea.setForeground(Color.WHITE);
+        textArea.setSize(500,500);
         textArea.setEditable(false);
+        textArea.setLineWrap(true);
 
-        inputPanel.add(terminal);
+
+        inputPanel.add(label);
         inputPanel.add(textField);
 
-        outputPanel.setBackground(Color.BLACK);
-        outputPanel.add(inputPanel);
-        outputPanel.add(textArea);
+        outpanel.add(textArea);
+
+        terminal.setBackground(Color.BLACK);
+        terminal.add(inputPanel,BorderLayout.LINE_START);
+        terminal.add(outpanel,BorderLayout.PAGE_END);
 
 
         textField.addKeyListener(new KeyListener() {
@@ -70,6 +94,7 @@ public class View extends JFrame{
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar()==KeyEvent.VK_ENTER) {
                     if (textField.getText().equalsIgnoreCase(currentQuestion.getCommand())) {
+                        textArea.setText(getUsername(textField.getText()).stream().collect(Collectors.joining("\n")));
                         correct();
                     } else {
                         JOptionPane.showMessageDialog(null, "Fel, försök igen");
@@ -86,13 +111,14 @@ public class View extends JFrame{
         });
 
         contentPanel.add(createImage(), BorderLayout.NORTH);
-        contentPanel.add(outputPanel, BorderLayout.CENTER);
+        contentPanel.add(terminal, BorderLayout.CENTER);
         contentPanel.add(description,BorderLayout.SOUTH);
         contentPanel.setBorder(new EmptyBorder(20,90,20,90));
 
         mainPanel.add(contentPanel);
 
         add(mainPanel);
+//        pack(); //SpringLayout
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setVisible(true);
@@ -104,7 +130,9 @@ public class View extends JFrame{
     }
 
     public void correct() {
-        terminal.setText(currentQuestion.getOutput());
+        if(textField.getText().equals("pwd"))
+            label.setText(currentQuestion.getOutput());
+
         controller.newQuestion();
         description.setText(currentQuestion.getMessage());
         textField.setText("");
@@ -119,5 +147,21 @@ public class View extends JFrame{
     public void win() {
         JOptionPane.showMessageDialog(null, "Du vann!");
         System.exit(0);
+    }
+
+    public java.util.List<String> getUsername(String input){
+
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command(OS.SHELL, OS.C, input);
+
+        try {
+            Process process = processBuilder.start();
+            InputStream inputStream = process.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            return new BufferedReader(inputStreamReader).lines().collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
