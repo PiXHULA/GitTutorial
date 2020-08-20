@@ -35,9 +35,9 @@ public class Controller {
                                             " * [new branch]      master -> master\n" +
                                             "Branch 'master' set up to track remote branch 'master' from 'origin'.\n"
                                             +"\nGRATTIS!","Pusha till master","git push -u origin master"));
-        
+
         this.view = new View(questions.get(counter), this);
-        
+
 }
 public void newQuestion(){
         if (counter==10) {
@@ -47,5 +47,5 @@ public void newQuestion(){
         this.view.setCurrentQuestion(questions.get(counter));
     }
         }
-        
+
 
