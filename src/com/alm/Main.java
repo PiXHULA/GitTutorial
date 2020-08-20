@@ -8,9 +8,9 @@ public class Main {
             ,"Initialized empty Git repository in C:/Users/user/softwaredev/.git/ "
             , "Main.java", "Main.java added",
             "No commits yet\n\n" +
-                    "Changes to be committed:\n" +
-                    "\t(use \"git rm --cached <file>...\" to unstage)\n" +
-                    "\t\tnew file:   Main.java"
+            "Changes to be committed:\n" +
+            "\t(use \"git rm --cached <file>...\" to unstage)\n" +
+            "\t\tnew file:   Main.java"
             , "[master (root-commit) ff3bbc8] first commit\n" +
             " 1 file changed, 0 insertions(+), 0 deletions(-)\n" +
             " create mode 100644 Main.java\n", "git remote origin added",
