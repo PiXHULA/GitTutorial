@@ -12,11 +12,12 @@ public class View extends JFrame{
     Controller controller;
 
     JLabel description;
-    JTextField textArea;
+    JTextField textField;
+    JTextArea textArea;
     JLabel terminal;
-    
-    public View(Question startingQuestion, Controller controller) {
-        
+
+    public View(Question startingQuestion,Controller controller) {
+
         currentQuestion = startingQuestion;
         this.controller = controller;
 
@@ -33,21 +34,33 @@ public class View extends JFrame{
         description.setFont(new Font("Calibri", Font.PLAIN, 12));
         description.setBorder(new EmptyBorder(20,0,20,0));
 
-        JPanel inputPanel = new JPanel(new GridLayout(3,2));
+        JPanel outputPanel = new JPanel(new GridLayout(2,1));
+        JPanel inputPanel = new JPanel(new FlowLayout());
+
+        inputPanel.setBackground(Color.BLACK);
 
         terminal = new JLabel("Terminal~ % ", SwingConstants.LEFT);
         terminal.setForeground(Color.WHITE);
 
-        textArea= new JTextField();
-        textArea.setBackground(Color.black);
-        textArea.setForeground(Color.white);
-        textArea.setBorder(new EmptyBorder(0,0,0,0));
+        textField = new JTextField();
+        textField.setBackground(Color.black);
+        textField.setForeground(Color.white);
+        textField.setBorder(new EmptyBorder(0,0,0,0));
+        textField.setPreferredSize(new Dimension());
 
-        inputPanel.setBackground(Color.BLACK);
+        textArea = new JTextArea(5,1);
+        textArea.setBackground(Color.BLACK);
+        textArea.setEditable(false);
+
         inputPanel.add(terminal);
-        inputPanel.add(textArea);
+        inputPanel.add(textField);
 
-        textArea.addKeyListener(new KeyListener() {
+        outputPanel.setBackground(Color.BLACK);
+        outputPanel.add(inputPanel);
+        outputPanel.add(textArea);
+
+
+        textField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
 
@@ -56,11 +69,12 @@ public class View extends JFrame{
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar()==KeyEvent.VK_ENTER) {
-                    if (textArea.getText().equalsIgnoreCase(currentQuestion.getCommand())) {
+                    if (textField.getText().equalsIgnoreCase(currentQuestion.getCommand())) {
                         correct();
                     } else {
                         JOptionPane.showMessageDialog(null, "Fel, försök igen");
-                        textArea.setText("");
+                        System.out.println(textField.getText());
+                        textField.setText("");
                     }
                 }
             }
@@ -72,7 +86,7 @@ public class View extends JFrame{
         });
 
         contentPanel.add(createImage(), BorderLayout.NORTH);
-        contentPanel.add(inputPanel, BorderLayout.CENTER);
+        contentPanel.add(outputPanel, BorderLayout.CENTER);
         contentPanel.add(description,BorderLayout.SOUTH);
         contentPanel.setBorder(new EmptyBorder(20,90,20,90));
 
@@ -93,7 +107,7 @@ public class View extends JFrame{
         terminal.setText(currentQuestion.getOutput());
         controller.newQuestion();
         description.setText(currentQuestion.getMessage());
-        textArea.setText("");
+        textField.setText("");
     }
 
     public static JLabel createImage() {
