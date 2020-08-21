@@ -1,10 +1,11 @@
 package com.alm;
 
 public class Question {
-        
+
         private String output;
         private String message;
         private String command;
+
 
         public Question(String output, String message, String command) {
                 this.output = output;

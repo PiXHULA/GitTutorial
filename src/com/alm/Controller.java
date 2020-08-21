@@ -25,7 +25,7 @@ public class Controller {
                                             "\t\tnew file:   Main.java","Se tracked och untracked filer","git status"));
         questions.add(new Question("[master (root-commit) ff3bbc8] first commit\n" +
                                             " 1 file changed, 0 insertions(+), 0 deletions(-)\n" +
-                                            " create mode 100644 Main.java\n","Committa med kommentar 'first commit'","git commit -m\"first commit\""));
+                                            " create mode 100644 Main.java\n","Committa med kommentar 'first commit'","git commit -m \"first commit\""));
         questions.add(new Question("git remote origin added","Lägg till remote på: https://github.com/myfirstgithubrepo/softwaredev.git","git remote add origin https://github.com/myfirstgithubrepo/softwaredev.git"));
         questions.add(new Question("Enumerating objects: 3, done.\n" +
                                             "Counting objects: 100% (3/3), done.\n" +

@@ -40,12 +40,15 @@ public class View extends JFrame {
     JLabel label;
     OS OS;
     ProcessBuilder processBuilder;
+    String path = "/Users/";
+    String username;
 
     public View(Question startingQuestion, Controller controller) {
 
         OS = OSValidator.getOs();
         processBuilder = new ProcessBuilder();
-        String username = getUsername("whoami").get(0);
+        username = execCommand("whoami").get(0);
+        path = "/Users/" + username + "/Desktop";
         currentQuestion = startingQuestion;
         this.controller = controller;
 
@@ -111,7 +114,7 @@ public class View extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                     if (textField.getText().equalsIgnoreCase(currentQuestion.getCommand())) {
-                        textArea.setText(getUsername(textField.getText()).stream().collect(Collectors.joining("\n")));
+                        textArea.setText(execCommand(textField.getText()).stream().collect(Collectors.joining("\n")));
                         correct();
                     } else {
                         JOptionPane.showMessageDialog(null, "Fel, försök igen");
@@ -142,6 +145,7 @@ public class View extends JFrame {
     public void correct() {
         String inputText = textField.getText();
         if (inputText.startsWith("cd")) {
+            path = "/Users/"+username+"/Desktop/softwaredev";
             label.setText(label.getText() + "\\" + inputText.replace("cd ", ""));
         }
         controller.newQuestion();
@@ -159,9 +163,10 @@ public class View extends JFrame {
         System.exit(0);
     }
 
-    public java.util.List<String> getUsername(String input) {
+    public java.util.List<String> execCommand(String command) {
 
-        processBuilder.command(OS.SHELL, OS.C, input);
+        processBuilder.directory(new File(path));
+        processBuilder.command(OS.SHELL, OS.C, command);
         try {
             Process process = processBuilder.start();
             InputStream inputStream = process.getInputStream();
