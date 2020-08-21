@@ -70,21 +70,20 @@ public class View extends JFrame {
         //containers
         JPanel inputPanel = new JPanel();
         inputPanel.setMaximumSize(new Dimension(100, 20));
-
         inputPanel.setBackground(BLACK);
 
         JPanel outpanel = new JPanel();
         outpanel.setBackground(BLACK);
 
-        label = new JLabel(username + "$ ", SwingConstants.LEFT);
+        label = new JLabel(username + "$", SwingConstants.LEFT);
         label.setForeground(Color.WHITE);
 
         textField = new JTextField();
-
         textField.setBackground(BLACK);
         textField.setForeground(Color.white);
         textField.setBorder(new EmptyBorder(0, 0, 0, 0));
-        textField.setPreferredSize(new Dimension(400, 20));
+        textField.setPreferredSize(new Dimension(250, 20));
+
         textArea = new JTextArea(20, 45);
         JScrollPane scroll = new JScrollPane(textArea, VERTICAL_SCROLLBAR_ALWAYS, HORIZONTAL_SCROLLBAR_NEVER);
         JScrollBar verticalScrollBar = new JScrollBar();
@@ -133,7 +132,7 @@ public class View extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setVisible(true);
-        setSize(new Dimension(600, 400));
+        setSize(new Dimension(600, 700));
     }
 
     public void setCurrentQuestion(Question currentQuestion) {
@@ -142,10 +141,9 @@ public class View extends JFrame {
 
     public void correct() {
         String inputText = textField.getText();
-        if (inputText.equals("pwd") || inputText.startsWith("cd")) {
-            label.setText(currentQuestion.getOutput());
+        if (inputText.startsWith("cd")) {
+            label.setText(label.getText() + "\\" + inputText.replace("cd ", ""));
         }
-
         controller.newQuestion();
         description.setText(currentQuestion.getMessage());
         textField.setText("");
@@ -153,8 +151,7 @@ public class View extends JFrame {
 
     public static JLabel createImage() {
         String logoPath = "src/com/alm/resources/template.png";
-        JLabel logoGame = new JLabel(new ImageIcon(logoPath));
-        return logoGame;
+        return new JLabel(new ImageIcon(logoPath));
     }
 
     public void win() {
