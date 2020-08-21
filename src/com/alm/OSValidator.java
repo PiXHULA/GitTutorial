@@ -6,9 +6,9 @@ public class OSValidator {
 
     public static OS getOs (){
         if (isWindows()) {
-            return new OS("powershell", "/C");
+            return new OS("powershell", "/C", "$env:username");
         } else {
-            return new OS("/bin/bash", "-c");
+            return new OS("/bin/bash", "-c","whoami");
         }
     }
 

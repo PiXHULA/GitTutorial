@@ -47,7 +47,7 @@ public class View extends JFrame {
 
         OS = OSValidator.getOs();
         processBuilder = new ProcessBuilder();
-        username = execCommand("whoami").get(0);
+        username = execCommand(OS.username).get(0);
         path = "/Users/" + username + "/Desktop";
         currentQuestion = startingQuestion;
         this.controller = controller;
@@ -145,7 +145,7 @@ public class View extends JFrame {
     public void correct() {
         String inputText = textField.getText();
         if (inputText.startsWith("cd")) {
-            path = "/Users/"+username+"/Desktop/softwaredev";
+            path = "/Users/"+username+"/Desktop/softwaredev/";
             label.setText(label.getText() + "\\" + inputText.replace("cd ", ""));
         }
         controller.newQuestion();
@@ -166,6 +166,9 @@ public class View extends JFrame {
     public java.util.List<String> execCommand(String command) {
 
         processBuilder.directory(new File(path));
+        if(OS.SHELL.equals("powershell") && command.startsWith("touch"))
+            command = "new-item Main.java";
+
         processBuilder.command(OS.SHELL, OS.C, command);
         try {
             Process process = processBuilder.start();
